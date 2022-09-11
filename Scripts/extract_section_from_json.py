@@ -1,3 +1,22 @@
+'''
+This script can be used to extract specific sections of the scholarly document from json files
+
+Run script extract_data_from_json.py
+
+Usage:
+
+python extract_data_from_json.py -s <section_name> -i <input_path> -o <output_path>
+
+
+<section_name> : Name of the section that is to be extracted. Possible section names: abstract, body, references
+
+<input_path> : path to the input directory containing s2orc json files
+
+<output_path> : output directory where the text file containing the extracted sections from all given json files will be stored
+
+'''
+
+
 import json
 import os
 import argparse
@@ -50,13 +69,13 @@ def extract_text(data, section):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Extract data from json")
     parser.add_argument("-s", "--section", default=None, help="Section of json to extract")
-    parser.add_argument("-i","--input", default=None, help="Path to input json directory")
-    parser.add_argument("-o","--output",default=None, help="Path to output text file")
+    parser.add_argument("-i","--inputPath", default=None, help="Path to input json directory")
+    parser.add_argument("-o","--outputPath",default=None, help="Path to output text file")
 
     args = parser.parse_args()
 
-    input_path = args.input
-    output_path = args.output
+    input_path = args.inputPath
+    output_path = args.outputPath
     section = args.section
 
     extract_data_from_json(input_path, output_path, section)
