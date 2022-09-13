@@ -2,30 +2,41 @@
 
 ## Description
 
-The ACL Anthology Rich Text corpus (ACL-ART) is a scholarly corpus in computational linguistic domain, obtained and processed from [ACL Anthology](https://aclanthology.org/). The documents are made available in pdf and s2orc json formats. Annotated datasets for downstream NLP tasks such as Citation Intent Classification are also provided. It provides full text of all documents in the ACL Anthology Collection( 74,313 files) until July 2022 in PDF and json formats.
+The ACL Anthology Rich Text corpus (ACL-ART) is a scholarly corpus in computational linguistic domain, obtained and processed from [ACL Anthology](https://aclanthology.org/). The documents are made available in pdf and s2orc json formats. Human annotated datasets for downstream NLP tasks such as Citation Intent Classification are also provided. It provides full text of all documents in the ACL Anthology Collection (74,313 files) until July 2022 in PDF and json formats.
 
 This corpus is under active development at National University of Singapore (NUS), Singapore. 
 
-## ACL ART Structure
+## ACL ART Corpus
 
-pdf/ - PDFs of all files in the ACL Anthology website 
+The ACL ART Corpus can be accessed [here](https://drive.google.com/drive/folders/1RQdsRROlz7JXG5UF2OQfcKbYkhix-9DL?usp=sharing). Note that, originial files in ```pdf``` and ```json``` directories are organized by venues, we compressed these files by the prefix of venues. For example prefixA.zip contains all files in venues ```A, aacl, acl, adaptnlp, aespen, ai4hi, alta``` and etc.
 
-json/ - s2orc json files of all the PDFs in the pdf/ folder 
+```
+├──pdf/ - PDFs of all files in the ACL Anthology website 
 
-docs/ - contains the list of files in the pdf directory, hashes of PDFs
+├──json/ - s2orc json files of all the PDFs in the pdf/ folder 
 
-annotated_datasets/ - contains annotated datasets for various downstream NLP tasks
+├──docs/ - contains the list of files in the pdf directory, hashes of PDFs
+
+├──annotated_datasets/ - contains annotated datasets for various downstream NLP tasks
+```
 
 ## Steps to reproduce this corpus
 
-1) Download pdf files from ACL Anthology web server
+### Download PDF files from ACL Anthology
 
-We use the ``` make mirror ``` command as specified in the [ACL Anthology repository](https://github.com/acl-org/acl-anthology). The files will be available in the build folder. 
+The [ACL Anthology](https://aclanthology.org/) is frequently updated. They have a github repository [acl-anthology](https://github.com/acl-org/acl-anthology) for easy management. After ```git clone https://github.com/acl-org/acl-anthology```, we use the recommended ``` make mirror ``` command to download all PDF files, which runs ```./bin/create_mirror.py```. The PDF files can be founded ```./build/anthology-files/pdf/```, organized in venues.
 
-To compute hash values of the pdf files, run the utility computeHashes.py from Docs folder. We use a custom function provided by anthology.utils to compute hashes. Refer [here](https://aclanthology.org/info/development/) for setup. Ensure that Docs folder is in the same directory as pdf folder.
+We provide documentation files of the ACL ART corpus, including file lists, hashes of all files. To compute hash values of the pdf files, run the utility computeHashes.py from ```Docs``` folder. We use a custom function provided by anthology.utils to compute hashes. Refer [here](https://aclanthology.org/info/development/) for setup. Ensure that Docs folder is in the same directory as pdf folder.
 
 
-2) Convert pdf files to machine readable format
+### Convert PDF files to machine readable format
 
-We use, s2orc-doc2json tooklit for this. To set up s2orc-doc2json toolkit, follow the instructions provided in the [s2orc-doc2json repository](https://github.com/allenai/s2orc-doc2json). After setting up and running s2orc-doc2json toolkit, run the script run_s2orc_doc2json.py from Scripts folder.
-  
+In order to maintain same format with another scholarly corpus S2ORC from AllenAI, we adopt the json format for full text files. And we use [s2orc-doc2json](https://github.com/allenai/s2orc-doc2json) tooklit for extracting structured full text from PDF files. To set up s2orc-doc2json toolkit, follow the instructions provided in the [s2orc-doc2json repository](https://github.com/allenai/s2orc-doc2json). After setting up and running s2orc-doc2json toolkit, run the script ```Scripts\run_s2orc_doc2json.py``` for full text extraction.
+
+## Rich Information Extraction
+
+We aim to extract rich information from the extracted full text files with state-of-the-art NLP toolkits. This is an On-going work.
+
+## Collaboration
+
+We hope this corpus to be a collaborative corpus, just as a previous version [ACL ARC corpus](https://catalog.ldc.upenn.edu/docs/LDC2009T29/lrec_08/) did. We hope you can contribute effort to convert PDF files to JSON full text files as well as Rich Information Extraction part. If you are interested in this project, please drop us an email to [Dr. Yanxia Qin](qolina@gmail.com).
