@@ -26,16 +26,24 @@ The ACL ART Corpus can be accessed [here](https://drive.google.com/drive/folders
 
 The [ACL Anthology](https://aclanthology.org/) is frequently updated. They have a github repository [acl-anthology](https://github.com/acl-org/acl-anthology) for easy management. After ```git clone https://github.com/acl-org/acl-anthology```, we use the recommended ``` make mirror ``` command to download all PDF files, which runs ```./bin/create_mirror.py```. The PDF files can be founded ```./build/anthology-files/pdf/```, organized in venues.
 
-We provide documentation files of the ACL ART corpus, including file lists, hashes of all files. To compute hash values of the pdf files, run the utility computeHashes.py from ```Docs``` folder. We use a custom function provided by anthology.utils to compute hashes. Refer [here](https://aclanthology.org/info/development/) for setup. Ensure that Docs folder is in the same directory as pdf folder.
+We provide documentation files of the ACL ART corpus, including file lists, hashes of all files. To compute hash values of the pdf files, run the utility computeHashes.py from ```docs``` folder. We use a custom function provided by anthology.utils to compute hashes. Refer [here](https://aclanthology.org/info/development/) for setup. Ensure that Docs folder is in the same directory as pdf folder.
 
 
 ### Convert PDF files to machine readable format
 
-In order to maintain same format with another scholarly corpus S2ORC from AllenAI, we adopt the json format for full text files. And we use [s2orc-doc2json](https://github.com/allenai/s2orc-doc2json) tooklit for extracting structured full text from PDF files. To set up s2orc-doc2json toolkit, follow the instructions provided in the [s2orc-doc2json repository](https://github.com/allenai/s2orc-doc2json). After setting up and running s2orc-doc2json toolkit, run the script ```Scripts\run_s2orc_doc2json.py``` for full text extraction.
+In order to maintain same format with another scholarly corpus S2ORC from AllenAI, we adopt the json format for full text files. And we use [s2orc-doc2json](https://github.com/allenai/s2orc-doc2json) tooklit for extracting structured full text from PDF files. To set up s2orc-doc2json toolkit, follow the instructions provided in the [s2orc-doc2json repository](https://github.com/allenai/s2orc-doc2json). After setting up and running s2orc-doc2json toolkit, run the script ```scripts\run_s2orc_doc2json.py``` for full text extraction.
 
 ## Rich Information Extraction
 
 We aim to extract rich information from the extracted full text files with state-of-the-art NLP toolkits. This is an On-going work.
+
+### Citation Intent Classification
+
+Citations play a crucial role in scientific discourse. We provide a machine annotated dataset for Citation Intent Classification. Citation Intent Classification aims to classify citation contexts based on their intent to make it easier for the users to understand why a specific author cited another paper. 
+
+We used [Scibert](https://github.com/allenai/scibert), finetuned on the [Scicite dataset](https://allenai.org/data/scicite) for this. Based on their intent, citations are classified into 3 categories - background (providing background information), method (use of a method, tool or a dataset) and result (comparison of results).
+
+We followed the instructions specified in the [Scibert repository](https://github.com/allenai/scibert) to fine tune the model and make predictions. We used ```scibert-scivocab-uncased``` as the base model, learning rate of ```2e-5``` for ```2 epochs``` as mentioned [here](https://arxiv.org/pdf/1903.10676.pdf) and we were able to reproduce similar results. We also validated the predictions on a human annotated test set contatining 95 citations. The model gave a macro averaged F score of 68. 
 
 ## Collaboration
 
