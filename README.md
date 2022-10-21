@@ -31,7 +31,13 @@ We provide documentation files of the ACL ART corpus, including file lists, hash
 
 ### Convert PDF files to machine readable format
 
-In order to maintain same format with another scholarly corpus S2ORC from AllenAI, we adopt the json format for full text files. And we use [s2orc-doc2json](https://github.com/allenai/s2orc-doc2json) tooklit for extracting structured full text from PDF files. To set up s2orc-doc2json toolkit, follow the instructions provided in the [s2orc-doc2json repository](https://github.com/allenai/s2orc-doc2json). After setting up and running s2orc-doc2json toolkit, run the script ```scripts\run_s2orc_doc2json.py``` for full text extraction.
+In order to maintain same format with another scholarly corpus S2ORC from AllenAI, we adopt the json format for full text files. And we use [s2orc-doc2json](https://github.com/allenai/s2orc-doc2json) tooklit for extracting structured full text from PDF files. To set up s2orc-doc2json toolkit, follow the instructions provided in the [s2orc-doc2json repository](https://github.com/allenai/s2orc-doc2json). After setting up and running s2orc-doc2json toolkit, follow the steps below for full text extraction:
+
+1. Create an input folder called ```PDF``` in your root directory 
+2. Create an output folder called ```Output_JSON``` in your root directory
+3. Make sure the paths match your directory path. Open the ```run_s2orc_doc2json.sh``` file and edit the first line to point to this project folder.
+4. Run the necessary scripts by calling ```bash run_s2orc_doc2json.sh```
+
 
 ## Rich Information Extraction
 
